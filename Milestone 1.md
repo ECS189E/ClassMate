@@ -110,24 +110,24 @@
 
 ### LoginVC
 
-![1511542155985_ pic](https://user-images.githubusercontent.com/24563722/48452662-ed5f6d00-e764-11e8-85d2-222efdb127d8.jpg)
+![1511542155985_ pic](https://user-images.githubusercontent.com/24563722/48452662-ed5f6d00-e764-11e8-85d2-222efdb127d8.jpg = 250x)
 
 ### AccountSetupVC
 
-![1521542155986_ pic](https://user-images.githubusercontent.com/24563722/48452663-ed5f6d00-e764-11e8-919d-6bbe5c736b5d.jpg)
+![1521542155986_ pic](https://user-images.githubusercontent.com/24563722/48452663-ed5f6d00-e764-11e8-919d-6bbe5c736b5d.jpg = 250x)
 
 ### MainVC
 
-![1531542155987_ pic](https://user-images.githubusercontent.com/24563722/48452664-ed5f6d00-e764-11e8-97a8-2ef0e0345954.jpg)
+![1531542155987_ pic](https://user-images.githubusercontent.com/24563722/48452664-ed5f6d00-e764-11e8-97a8-2ef0e0345954.jpg = 250x)
 
 ### ChatVC
 
-![1541542155988_ pic](https://user-images.githubusercontent.com/24563722/48452665-ed5f6d00-e764-11e8-8704-970057d82bbf.jpg)
+![1541542155988_ pic](https://user-images.githubusercontent.com/24563722/48452665-ed5f6d00-e764-11e8-8704-970057d82bbf.jpg = 250x)
 
 ### SettingVC
 
-![1551542155989_ pic](https://user-images.githubusercontent.com/24563722/48452666-ed5f6d00-e764-11e8-840d-c82b8b0d47f1.jpg)
+![1551542155989_ pic](https://user-images.githubusercontent.com/24563722/48452666-ed5f6d00-e764-11e8-840d-c82b8b0d47f1.jpg = 250x)
 
 ### ProfileVC
 
-![1561542155991_ pic](https://user-images.githubusercontent.com/24563722/48452667-edf80380-e764-11e8-952b-9a4b030e9fc4.jpg)
+![1561542155991_ pic](https://user-images.githubusercontent.com/24563722/48452667-edf80380-e764-11e8-952b-9a4b030e9fc4.jpg = 250x)
