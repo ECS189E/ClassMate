@@ -1,4 +1,4 @@
-## List of third party libraries: 
+## List of third party libraries:
 
 - MessageKit (<https://cocoapods.org/pods/MessageKit>)
 - ChatSDK (<https://cocoapods.org/pods/ChatSDK>) 		
@@ -7,7 +7,7 @@
 
 - [Herokuapp](https://herokuapp.com/) (?)
 
-- - Free server host
+  - Free server host
 
 ## APIs:
 
@@ -15,35 +15,35 @@
 
 - getUserProfile( )
 
-- - Querying a single user
+  - Querying a single user
 
 - updateUserProfile( )
 
-- - Updating a user’s profile
+  - Updating a user’s profile
 
 - getChatLog( )
 
-- - Retrieve recent chat history
+  - Retrieve recent chat history
 
 - getUsers( ) 
 
-- - Return a list of users matching a particular query
+  - Return a list of users matching a particular query
 
 ## List of Models:
 
 - ChatModel (WIP)
 
-- - Should chats be stored locally on server-side?
+  - Should chats be stored locally on server-side?
 
-  - - Combination of both?
+    - Combination of both?
 
   - Time vs space complexity
 
 - ProfileModel
 
-- - DisplayName (editable)
+  - DisplayName (editable)
 
-  - - Perhaps separate from real name
+    - Perhaps separate from real name
 
   - Avatar
 
@@ -53,11 +53,11 @@
 
   - Privacy setting
 
-  - - Each field can be made private
+    - Each field can be made private
 
     - Privacy modes:
 
-    - - Visible to everyone
+      - Visible to everyone
       - Visible only to people in same chat rooms 
 
 ## List of ViewControllers:
@@ -66,30 +66,30 @@
 
 - SettingViewController
 
-- - Segue from LoginViewController after successful login for new users
+  - Segue from LoginViewController after successful login for new users
   - New users should fill in their profile
   - Old users can update their profile here
   - Logout 
 
 - MainViewController
 
-- - Display all chat rooms the user is in
+  - Display all chat rooms the user is in
   - Search 
   - Add new chat room
 
 - ChatViewController 
 
-- - Should have a button to view the list of active members in the current chat session
+  - Should have a button to view the list of active members in the current chat session
   - Should have a button to view the list of all the members registered in the classroom
 
 - ProfileViewController
 
-- - Click on a user’s avatar navigates to his or her profile page
+  - Click on a user’s avatar navigates to his or her profile page
   - Viewing a user’s own profile will allow them to edit it
 
 - SearchViewController
 
-- - Search for users or attributes (such as classes enrolled)
+  - Search for users or attributes (such as classes enrolled)
 
 ## List of week-long tasks and timeline:
 
