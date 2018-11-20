@@ -35,11 +35,6 @@
 
 
 
-### Database
-
-- Setting this up will allow us to store data
-- This will pave the way for implementing user profiles 
-
 
 
 ## 3. Issues we're having
