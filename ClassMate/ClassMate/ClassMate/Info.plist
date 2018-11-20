@@ -20,11 +20,11 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -46,5 +46,54 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>MD.ClassMate</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>co.deluge.Chat-SDK</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1088435112418-4cm46hg39okkf0skj2h5roj1q62anmec</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitterkit-Kqprq5b6bVeEfcMAGoHzUmB3I</string>
+			</array>
+		</dict>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>To send an image message</string>
+	<key>NSContactsUsageDescription</key>
+	<string>To check if any of your contacts use this app</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>To send location messages</string>
+	<key>NSLocationUsageDescription</key>
+	<string>To send location messages</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To send location messages</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To send audio messages</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To save the photo to your library</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To access your photos to customise your profile or image message</string>
 </dict>
 </plist>
