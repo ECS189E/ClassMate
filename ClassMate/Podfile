@@ -10,6 +10,6 @@ target 'ClassMate' do
   pod "ChatSDKFirebase/Adapter"
   pod "ChatSDKFirebase/FileStorage"
   pod "ChatSDKFirebase/Push"
-  pod "ChatSDKFirebase/SocialLogin"
+  #pod "ChatSDKFirebase/SocialLogin"
 
 end

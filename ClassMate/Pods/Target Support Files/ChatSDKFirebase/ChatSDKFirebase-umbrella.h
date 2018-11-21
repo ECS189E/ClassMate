@@ -42,12 +42,6 @@
 #import "BFirebasePushModule.h"
 #import "BLocalNotificationDelegate.h"
 #import "FirebasePush.h"
-#import "BFirebaseSocialLoginHandler.h"
-#import "BFirebaseSocialLoginModule.h"
-#import "BGoogleHelper.h"
-#import "BGoogleLoginViewController.h"
-#import "PGoogleLoginDelegate.h"
-#import "SocialLogin.h"
 
 FOUNDATION_EXPORT double ChatSDKFirebaseVersionNumber;
 FOUNDATION_EXPORT const unsigned char ChatSDKFirebaseVersionString[];

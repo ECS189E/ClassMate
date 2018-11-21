@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AF271316D40187AC5F6188BAFCBAE7E"
+               BlueprintIdentifier = "015FD1C0845098FFC7E0FFA1AC6C08F1"
                BlueprintName = "ChatSDKFirebase"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "ChatSDKFirebase.framework">

@@ -14,12 +14,6 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - Bolts (1.9.0):
-    - Bolts/AppLinks (= 1.9.0)
-    - Bolts/Tasks (= 1.9.0)
-  - Bolts/AppLinks (1.9.0):
-    - Bolts/Tasks
-  - Bolts/Tasks (1.9.0)
   - ChatSDK (4.9.5):
     - ChatSDK/Complete (= 4.9.5)
   - ChatSDK/Complete (4.9.5):
@@ -57,13 +51,6 @@ PODS:
     - ChatSDKFirebase/Adapter
     - Firebase/Functions
     - Firebase/Messaging
-  - ChatSDKFirebase/SocialLogin (4.9.6):
-    - ChatSDK
-    - ChatSDKFirebase/Adapter
-    - FBSDKLoginKit
-    - GoogleSignIn
-    - TwitterCore
-    - TwitterKit
   - ChatSDKKeepLayout (1.7.5):
     - ChatSDKKeepLayout/Swift (= 1.7.5)
   - ChatSDKKeepLayout/ObjC (1.7.5)
@@ -71,10 +58,6 @@ PODS:
     - ChatSDKKeepLayout/ObjC
   - CountryPicker (1.3)
   - DateTools (2.0.0)
-  - FBSDKCoreKit (4.38.1):
-    - Bolts (~> 1.9)
-  - FBSDKLoginKit (4.38.1):
-    - FBSDKCoreKit
   - Firebase/Auth (5.13.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.5)
@@ -123,19 +106,6 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GTMSessionFetcher/Core (~> 1.1)
   - FrameAccessor (1.3.2)
-  - GoogleSignIn (4.3.0):
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
-    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
-    - GTMOAuth2 (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.1.4):
-    - GoogleToolboxForMac/Defines (= 2.1.4)
-  - GoogleToolboxForMac/Defines (2.1.4)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.4)":
-    - GoogleToolboxForMac/DebugUtils (= 2.1.4)
-    - GoogleToolboxForMac/Defines (= 2.1.4)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
   - GoogleUtilities/Environment (5.3.6)
   - GoogleUtilities/Logger (5.3.6):
     - GoogleUtilities/Environment
@@ -143,13 +113,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
-  - GTMOAuth2 (1.1.6):
-    - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.2.1):
-    - GTMSessionFetcher/Full (= 1.2.1)
   - GTMSessionFetcher/Core (1.2.1)
-  - GTMSessionFetcher/Full (1.2.1):
-    - GTMSessionFetcher/Core (= 1.2.1)
   - Hakawai (5.1.6):
     - Hakawai/Core (= 5.1.6)
     - Hakawai/Mentions (= 5.1.6)
@@ -168,9 +132,6 @@ PODS:
   - StaticDataTableViewController (2.5.0)
   - Toast (4.0.0)
   - TOCropViewController (2.3.8)
-  - TwitterCore (3.2.0)
-  - TwitterKit (3.4.2):
-    - TwitterCore (>= 3.2.0)
   - VENTokenField (2.5.2):
     - FrameAccessor (~> 1.0)
 
@@ -179,19 +140,15 @@ DEPENDENCIES:
   - ChatSDKFirebase/Adapter
   - ChatSDKFirebase/FileStorage
   - ChatSDKFirebase/Push
-  - ChatSDKFirebase/SocialLogin
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
-    - Bolts
     - ChatSDK
     - ChatSDKFirebase
     - ChatSDKKeepLayout
     - CountryPicker
     - DateTools
-    - FBSDKCoreKit
-    - FBSDKLoginKit
     - Firebase
     - FirebaseAnalyticsInterop
     - FirebaseAuth
@@ -203,10 +160,7 @@ SPEC REPOS:
     - FirebaseMessaging
     - FirebaseStorage
     - FrameAccessor
-    - GoogleSignIn
-    - GoogleToolboxForMac
     - GoogleUtilities
-    - GTMOAuth2
     - GTMSessionFetcher
     - Hakawai
     - leveldb-library
@@ -219,20 +173,15 @@ SPEC REPOS:
     - StaticDataTableViewController
     - Toast
     - TOCropViewController
-    - TwitterCore
-    - TwitterKit
     - VENTokenField
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   ChatSDK: c7cd28bc48ff0f0665b5875df1085164deaa02be
   ChatSDKFirebase: 6ea10e54594787e56e3cfc073f3b55cdae8543bf
   ChatSDKKeepLayout: 1ddfbdee4cba338728ede47e77c452ef865e46e2
   CountryPicker: 664c26411d833bb068c80beb15dc951eadde2911
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
-  FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
-  FBSDKLoginKit: 4621c690d9dd8628031a4791497062183ea34b0d
   Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
   FirebaseAnalyticsInterop: e5f21be9af6548372e2f0815834ff909bff395a2
   FirebaseAuth: 9299ab178271bec7426967b05b2718bb6fc31f17
@@ -244,10 +193,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 0f14a264b0d7f867e8eff5d3556bc5d0d4e57888
   FirebaseStorage: 3d22c041370593e639fba013d1eb698a8dae2881
   FrameAccessor: 0f7ba6ce37be9a5d0302a27c731dca70af8d438b
-  GoogleSignIn: 11183592dc63e105475c7305a325045ff95e02b7
-  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
-  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   Hakawai: caf8cceda91548a12552d167e79c7dd88a88a7c2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
@@ -260,10 +206,8 @@ SPEC CHECKSUMS:
   StaticDataTableViewController: 0c5c4a47861446dd3cfd52530ae801ec7662ce26
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   TOCropViewController: 0a075f02c253e88095143bbac7b013fc6fba5090
-  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
-  TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
   VENTokenField: 5a19b838fb97f040e3d4c93f584b4adeaf3fc1ee
 
-PODFILE CHECKSUM: 9d421af35c4497e879f4f814ef731f29fcb3667e
+PODFILE CHECKSUM: 784f8c5e2afde28e6b7b596ca33d65ee225e4aef
 
 COCOAPODS: 1.5.3
