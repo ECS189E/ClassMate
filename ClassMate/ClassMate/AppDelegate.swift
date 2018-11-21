@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         config.rootPath = "test"
         // Configure other options here...
         
+        config.googleClientKey = "450932966967-ct2kva36uln6982il5ej0dpl1j6e7fra.apps.googleusercontent.com";
         config.allowUsersToCreatePublicChats = true
         BChatSDK.initialize(config, app: application, options: launchOptions)
         
