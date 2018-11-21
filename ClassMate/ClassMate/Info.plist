@@ -59,7 +59,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>co.deluge.Chat-SDK</string>
+				<string>MD.ClassMate</string>
 			</array>
 		</dict>
 		<dict>

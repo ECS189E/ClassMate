@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return BChatSDK.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return BChatSDK.application(app, open: url, options: options)
     }
 
