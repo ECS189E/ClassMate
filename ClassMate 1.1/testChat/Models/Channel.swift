@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+struct ChatRoom
+{
+    let roomID : String?
+    let name : String
+    let type : Int
+    
+    init(name: String) {
+        roomID = nil
+        self.name = name
+        self.type = 0 // 0 for private chat, 1 for public class chat
+    }
+}
