@@ -21,6 +21,14 @@
                                 <rect key="frame" x="125" y="500.5" width="125" height="30"/>
                                 <state key="normal" title="Sign-in with Gmail"/>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1TC-q0-vXj" customClass="GIDSignInButton">
+                                <rect key="frame" x="67" y="329" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="signInPushed:" destination="ZDY-7C-sqZ" eventType="valueChanged" id="Ub7-1T-pyh"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -29,9 +37,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cDO-4q-g6D"/>
                     </view>
-                    <connections>
-                        <outlet property="googleSignIn" destination="lLl-A3-aZh" id="696-Jm-Ubz"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXd-B9-N1X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
