@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLl-A3-aZh">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLl-A3-aZh" customClass="GIDSIgnInButton">
                                 <rect key="frame" x="125" y="500.5" width="125" height="30"/>
                                 <state key="normal" title="Sign-in with Gmail"/>
                             </button>
@@ -30,7 +30,7 @@
                         <viewLayoutGuide key="safeArea" id="cDO-4q-g6D"/>
                     </view>
                     <connections>
-                        <outlet property="googleSignIn" destination="lLl-A3-aZh" id="j3E-uK-v2k"/>
+                        <outlet property="googleSignIn" destination="lLl-A3-aZh" id="696-Jm-Ubz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXd-B9-N1X" userLabel="First Responder" sceneMemberID="firstResponder"/>

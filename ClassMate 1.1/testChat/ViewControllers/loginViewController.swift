@@ -7,13 +7,20 @@
 
 import Foundation
 import UIKit
+import GoogleSignIn
 
-class loginViewController : UIViewController
+class loginViewController : UIViewController, GIDSignInUIDelegate
 {
-    @IBOutlet weak var googleSignIn: UIButton!
+
+    @IBOutlet weak var googleSignIn: GIDSignInButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
+        
+        // TODO(developer) Configure the sign-in button look/feel
+        // ...
     }
 }
