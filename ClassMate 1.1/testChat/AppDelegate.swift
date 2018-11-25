@@ -10,7 +10,7 @@ import Firebase
 import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
 
@@ -21,8 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
         // Use Firebase Library to configure APIs
         FirebaseApp.configure()
         
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        // get your storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        // instantiate your desired ViewController
+        let rootController = storyboard.instantiateViewController(withIdentifier: "loginViewController")
+        
+        // Because self.window is an optional you should check it's value first and assign your rootViewController
+        if let window = self.window {
+            window.rootViewController = rootController
+        }
+        
+        GIDSignIn.sharedInstance().clientID = "771197463282-b87trmajhetmgp1nlc294b5vs4sn7ofq.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
+        
         return true
     }
 
@@ -47,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate{
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
     
     @available(iOS 9.0, *)
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
