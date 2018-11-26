@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Use Firebase Library to configure APIs
         FirebaseApp.configure()
-        let db = Firestore.firestore()
         // get your storyboard
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         

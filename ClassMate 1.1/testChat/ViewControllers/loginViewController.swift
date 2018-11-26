@@ -13,7 +13,7 @@ import Firebase
 class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     var ref: DocumentReference!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +37,6 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
     @IBAction func signInPushed(_ sender: GIDSignInButton) {
         GIDSignIn.sharedInstance().signIn()
         
-        print("123")
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
@@ -55,8 +54,15 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             let familyName = user.profile.familyName
             let email = user.profile.email
             // ...
-            createNewUser(id: userId!, email: email!)
-            
+            let docRef = Firestore.firestore().collection("users").document(userId!)
+
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    print("User already exists")
+                } else {
+                   self.createNewUser(id: userId!, email: email!)
+                }
+            }
         }
         
         guard let authentication = user.authentication else { return }
@@ -80,7 +86,8 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             
             // TODO: Fetch the data from the server
             
-            
+            channelVC.signIn = signIn
+            channelVC.userID = user.userID!
             self.present(channelVC, animated: true, completion: nil)
         }
     }

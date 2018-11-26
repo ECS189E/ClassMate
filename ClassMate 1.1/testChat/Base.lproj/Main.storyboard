@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZDY-7C-sqZ">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZDY-7C-sqZ">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,17 +14,16 @@
             <objects>
                 <viewController storyboardIdentifier="loginViewController" id="ZDY-7C-sqZ" customClass="loginViewController" customModule="testChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4p0-N9-6CB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLl-A3-aZh" customClass="GIDSIgnInButton">
-                                <rect key="frame" x="125" y="500.5" width="125" height="30"/>
-                                <state key="normal" title="Sign-in with Gmail"/>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1TC-q0-vXj" customClass="GIDSignInButton">
-                                <rect key="frame" x="67" y="329" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1TC-q0-vXj" customClass="GIDSignInButton">
+                                <rect key="frame" x="87" y="615.5" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="SYI-pE-wD3"/>
+                                    <constraint firstAttribute="height" constant="128" id="sYe-Mb-yco"/>
+                                </constraints>
                                 <connections>
                                     <action selector="signInPushed:" destination="ZDY-7C-sqZ" eventType="valueChanged" id="Ub7-1T-pyh"/>
                                 </connections>
@@ -32,8 +31,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lLl-A3-aZh" firstAttribute="centerX" secondItem="cDO-4q-g6D" secondAttribute="centerX" id="Iik-2z-p4o"/>
-                            <constraint firstItem="lLl-A3-aZh" firstAttribute="centerY" secondItem="cDO-4q-g6D" secondAttribute="centerY" multiplier="1.5" id="eqG-Pb-qfk"/>
+                            <constraint firstItem="1TC-q0-vXj" firstAttribute="centerX" secondItem="cDO-4q-g6D" secondAttribute="centerX" id="PSB-jj-5pD"/>
+                            <constraint firstItem="1TC-q0-vXj" firstAttribute="centerY" secondItem="cDO-4q-g6D" secondAttribute="centerY" multiplier="1.5" id="UOh-C0-5aS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cDO-4q-g6D"/>
                     </view>
@@ -48,22 +47,73 @@
             <objects>
                 <viewController storyboardIdentifier="channelViewController" id="szh-Ag-sDa" customClass="channelViewController" customModule="testChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RKF-lA-k6F">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zav-qL-nN4">
+                                <rect key="frame" x="16" y="44" width="60" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="6Ld-xq-zbm"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="X4r-iJ-xT1"/>
+                                </constraints>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOut:" destination="szh-Ag-sDa" eventType="touchUpInside" id="iTM-n2-neG"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t3i-2K-VI7">
+                                <rect key="frame" x="16" y="84" width="378" height="680"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="channelCell" id="J4i-JI-NpT">
+                                        <rect key="frame" x="0.0" y="28" width="378" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J4i-JI-NpT" id="5Hk-bW-cqO">
+                                            <rect key="frame" x="0.0" y="0.0" width="378" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="szh-Ag-sDa" id="Hqm-Oh-g5l"/>
+                                    <outlet property="delegate" destination="szh-Ag-sDa" id="LVO-0i-mOq"/>
+                                </connections>
+                            </tableView>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ben-Xq-qw8">
+                                <rect key="frame" x="0.0" y="779" width="414" height="83"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items/>
+                            </tabBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ben-Xq-qw8" firstAttribute="bottom" secondItem="ZbB-T5-Anx" secondAttribute="bottom" id="2N8-G9-5cj"/>
+                            <constraint firstItem="ben-Xq-qw8" firstAttribute="leading" secondItem="ZbB-T5-Anx" secondAttribute="leading" id="5u6-La-3lR"/>
+                            <constraint firstItem="ZbB-T5-Anx" firstAttribute="trailing" secondItem="t3i-2K-VI7" secondAttribute="trailing" constant="20" id="MCK-UO-Cyv"/>
+                            <constraint firstItem="t3i-2K-VI7" firstAttribute="top" secondItem="Zav-qL-nN4" secondAttribute="bottom" constant="8" id="PRF-yf-ESY"/>
+                            <constraint firstItem="t3i-2K-VI7" firstAttribute="leading" secondItem="ZbB-T5-Anx" secondAttribute="leading" constant="16" id="Zsp-Bh-fCl"/>
+                            <constraint firstItem="ZbB-T5-Anx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Zav-qL-nN4" secondAttribute="trailing" symbolic="YES" id="dBX-F4-mQE"/>
+                            <constraint firstItem="ben-Xq-qw8" firstAttribute="top" secondItem="t3i-2K-VI7" secondAttribute="bottom" constant="15" id="dkH-8a-4LE"/>
+                            <constraint firstItem="Zav-qL-nN4" firstAttribute="leading" secondItem="ZbB-T5-Anx" secondAttribute="leading" constant="16" id="kF6-aC-H8b"/>
+                            <constraint firstItem="Zav-qL-nN4" firstAttribute="top" secondItem="ZbB-T5-Anx" secondAttribute="top" id="pRH-d0-7oD"/>
+                            <constraint firstItem="ben-Xq-qw8" firstAttribute="trailing" secondItem="ZbB-T5-Anx" secondAttribute="trailing" id="yIo-gT-Bs7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ZbB-T5-Anx"/>
                     </view>
+                    <connections>
+                        <outlet property="channelView" destination="t3i-2K-VI7" id="Nny-aQ-fMG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRE-P7-UU5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="183" y="32"/>
+            <point key="canvasLocation" x="182.60869565217394" y="31.473214285714285"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="chatViewController" id="BYZ-38-t0r" customClass="chatViewController" customModule="testChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
