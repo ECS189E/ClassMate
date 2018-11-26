@@ -47,6 +47,8 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             self.channels.append(chatroom)
         }
     }
+    @IBAction func registerChatroom(_ sender: Any) {
+    }
     
     @IBAction func signOut(_ sender: UIButton) {
         let firebaseAuth = Auth.auth()
@@ -72,6 +74,13 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.text = channel?.name
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.channels.remove(at: indexPath.row)
+            self.channelView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
     
 }
