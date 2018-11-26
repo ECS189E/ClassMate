@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct ChatRoom
 {
@@ -20,4 +21,11 @@ struct ChatRoom
         self.type = 0 // 0 for private chat, 1 for public class chat
         self.messages = []
     }
+    
+    // func updateChatRoom() -- save the conversation in the curren chatroom (self) to the server
+    
+    // func createNewChat()
+    
+    // func deleteChat()
+    
 }

@@ -34,3 +34,4 @@ extension Message: MessageType {
         return .text(text)
     }
 }
+

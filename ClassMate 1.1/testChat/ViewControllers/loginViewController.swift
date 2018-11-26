@@ -11,13 +11,15 @@ import GoogleSignIn
 import Firebase
 
 class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
-
+    
+    var ref: DocumentReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         //GIDSignIn.sharedInstance().uiDelegate = self
-
+        
         // TODO(developer) Configure the sign-in button look/feel
         // ...
         
@@ -53,6 +55,7 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             let familyName = user.profile.familyName
             let email = user.profile.email
             // ...
+            createNewUser(id: idToken!, email: email!)
             
         }
         
@@ -69,8 +72,14 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             // ...
             
             let Storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
+            
             let channelVC = self.storyboard?.instantiateViewController(withIdentifier: "channelViewController") as! channelViewController
+            
+            // Prepare the data that need to be fetched from the server for next view
+            // ...
+            
+            // TODO: Fetch the data from the server
+            
             
             self.present(channelVC, animated: true, completion: nil)
         }
@@ -88,4 +97,21 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
         print("presenting Google SignIn")
     }
     
+    func createNewUser(id: String, email: String) {
+        
+        // Add a new document with a generated ID
+        var ref: DocumentReference? = nil
+        ref = Firestore.firestore().collection("users").addDocument(data: [
+            "idToken": id,
+            "userName": email,
+            "channels": [String]()
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+
+    }
 }

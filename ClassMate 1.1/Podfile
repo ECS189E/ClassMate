@@ -9,6 +9,8 @@ target 'testChat' do
   pod "MessageKit"
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
   pod 'GoogleSignIn'
 
 end
