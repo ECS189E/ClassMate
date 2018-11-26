@@ -55,7 +55,7 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             let familyName = user.profile.familyName
             let email = user.profile.email
             // ...
-            createNewUser(id: idToken!, email: email!)
+            createNewUser(id: userId!, email: email!)
             
         }
         
@@ -100,16 +100,14 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
     func createNewUser(id: String, email: String) {
         
         // Add a new document with a generated ID
-        var ref: DocumentReference? = nil
-        ref = Firestore.firestore().collection("users").addDocument(data: [
-            "idToken": id,
+        Firestore.firestore().collection("users").document(id).setData([
             "userName": email,
             "channels": [String]()
         ]) { err in
             if let err = err {
-                print("Error adding document: \(err)")
+                print("Error writing document: \(err)")
             } else {
-                print("Document added with ID: \(ref!.documentID)")
+                print("Document successfully written!")
             }
         }
 
