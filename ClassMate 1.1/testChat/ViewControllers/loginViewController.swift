@@ -77,9 +77,8 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             // User is signed in
             // ...
             
-            let Storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let channelVC = self.storyboard?.instantiateViewController(withIdentifier: "channelViewController") as! channelViewController
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let channelVC = storyboard.instantiateViewController(withIdentifier: "channelViewController") as! channelViewController
             
             // Prepare the data that need to be fetched from the server for next view
             // ...
@@ -88,7 +87,8 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             
             channelVC.signIn = signIn
             channelVC.userID = user.userID!
-            self.present(channelVC, animated: true, completion: nil)
+            let navController = UINavigationController(rootViewController: channelVC)
+            self.present(navController, animated:true, completion: nil)
         }
     }
     

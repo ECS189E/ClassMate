@@ -18,8 +18,14 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     var channels = [ChatRoom?]()
     @IBOutlet weak var channelView: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isToolbarHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        channelView.tableFooterView = UIView()
         retrieveChannels()
         
     }
@@ -48,6 +54,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         }
     }
     @IBAction func registerChatroom(_ sender: Any) {
+        
     }
     
     @IBAction func signOut(_ sender: UIButton) {
@@ -67,6 +74,14 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return channels.count
     }
@@ -75,6 +90,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         let channel = self.channels[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "channelCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "channelCell")
         
+        cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = channel?.name
         
         return cell
@@ -85,6 +101,13 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             self.channels.remove(at: indexPath.row)
             self.channelView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let channel = channels[indexPath.row]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "chatViewController") as! chatViewController
+        navigationController!.pushViewController(vc, animated: true)
     }
     
 }
