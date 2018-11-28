@@ -126,6 +126,8 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         let channel = channels[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "chatViewController") as! chatViewController
+        
+        vc.channelName = channel?.name ?? " "
         navigationController!.pushViewController(vc, animated: true)
     }
     

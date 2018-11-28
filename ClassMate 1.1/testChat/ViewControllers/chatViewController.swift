@@ -13,10 +13,16 @@ class chatViewController: MessagesViewController {
     
     var messages: [Message] = []
     var member: Member!
+    var channelName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let name: String = self.channelName else {
+            return
+        }
+        
+        self.title = name
         member = Member(name: "bluemoon", color: .blue)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
