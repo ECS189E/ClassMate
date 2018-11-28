@@ -8,17 +8,20 @@
 import UIKit
 import MessageKit
 import MessageInputBar
+import Firebase
 
 class chatViewController: MessagesViewController {
     
     var messages: [Message] = []
     var member: Member!
     var channelName: String?
+    var messageListener: ListenerRegistration?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let name: String = self.channelName else {
+            navigationController?.popViewController(animated: true)
             return
         }
         
@@ -28,9 +31,37 @@ class chatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        
+        messageListener = Firestore.firestore().collection("channels").document(name).addSnapshotListener { querySnapshot, error in
+            guard let snapshot = querySnapshot else {
+                print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
+                return
+            }
+            
+            let source = snapshot.metadata.hasPendingWrites ? "Local" : "Server"
+            self.updateMessages()
+        }
     }
     
+    func retrieveMessages()
+    {
+        
+        let docRef = Firestore.firestore().collection("channels").document(self.channelName!)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                //
+                self.messagesCollectionView.reloadData()
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
+    func updateMessages()
+    {
+        
+    }
 }
 
 extension chatViewController: MessagesDataSource {
