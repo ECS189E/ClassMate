@@ -87,6 +87,7 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             
             channelVC.signIn = signIn
             channelVC.userID = user.userID!
+            channelVC.userName = user.profile.email!
             let navController = UINavigationController(rootViewController: channelVC)
             self.present(navController, animated:true, completion: nil)
         }

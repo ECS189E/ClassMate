@@ -16,7 +16,9 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     
     var signIn: GIDSignIn?
     var userID = ""
+    var userName = ""
     var channels = [ChatRoom?]()
+    var channelList = [String]()
     @IBOutlet weak var channelView: UITableView!
     @IBOutlet weak var registerNewClass: UIBarButtonItem!
     
@@ -38,8 +40,8 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let channelListString = document.data() as! [String: Any]
-                let channelList = channelListString["channels"] as! [String]
-                self.initializeChannels(using: channelList)
+                self.channelList = channelListString["channels"] as! [String]
+                self.initializeChannels(using: self.channelList)
                 self.channelView.reloadData()
             } else {
                 print("Document does not exist")
@@ -65,15 +67,30 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         self.present(registerVC, animated: true, completion: nil)
     }
     
+    // RegisterViewDelegate Protocols
     func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
     
     func join(classroom: String) {
         self.dismiss(animated: true, completion: nil)
-        let chatroom = ChatRoom.init(name: classroom)
-        self.channels.append(chatroom)
-        self.channelView.reloadData()
+        // check if channels already joined
+        if channels.contains(where: {$0!.name == classroom}) != true {
+            let chatroom = ChatRoom.init(name: classroom)
+            self.channels.append(chatroom)
+            self.channelList.append(classroom)
+            self.channelView.reloadData()
+            Firestore.firestore().collection("users").document(userID).setData([
+                "userName": self.userName,
+                "channels": self.channelList
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
+        }
     }
     
     @IBAction func signOut(_ sender: UIButton) {
