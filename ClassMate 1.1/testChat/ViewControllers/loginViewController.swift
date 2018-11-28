@@ -41,6 +41,8 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         // ...
+        var newUser: Bool = false
+        
         if let error = error {
             print("\(error.localizedDescription)")
             return
@@ -60,7 +62,8 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
                 if let document = document, document.exists {
                     print("User already exists")
                 } else {
-                   self.createNewUser(id: userId!, email: email!)
+                    self.createNewUser(id: userId!, email: email!)
+                    newUser = true
                 }
             }
         }
@@ -88,8 +91,16 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             channelVC.signIn = signIn
             channelVC.userID = user.userID!
             channelVC.userName = user.profile.email!
-            let navController = UINavigationController(rootViewController: channelVC)
-            self.present(navController, animated:true, completion: nil)
+            
+            // Display appropriate view based on whether user is new
+            if newUser {
+                let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! profileViewController
+                let navController = UINavigationController(rootViewController: profileVC)
+                self.present(navController, animated:true, completion: nil)
+            } else {
+                let navController = UINavigationController(rootViewController: channelVC)
+                self.present(navController, animated:true, completion: nil)
+            }
         }
     }
     
