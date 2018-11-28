@@ -113,6 +113,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="channelView" destination="t3i-2K-VI7" id="Nny-aQ-fMG"/>
+                        <outlet property="registerNewClass" destination="oa3-rW-gXg" id="eeM-9F-bAO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRE-P7-UU5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -148,6 +149,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7N-ul-5Ue">
+                                <rect key="frame" x="20" y="277" width="67" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="AgM-Ep-aZA" eventType="touchUpInside" id="6G0-Td-lgF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNg-6J-PVl">
+                                <rect key="frame" x="353" y="277" width="41" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Join">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="joinTapped:" destination="AgM-Ep-aZA" eventType="touchUpInside" id="N5h-iD-DiX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -163,6 +186,8 @@
                         <viewLayoutGuide key="safeArea" id="4no-uG-opQ"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="i7N-ul-5Ue" id="wzY-3H-Rn1"/>
+                        <outlet property="joinButton" destination="tNg-6J-PVl" id="qCN-fF-OUd"/>
                         <outlet property="joinTextField" destination="m14-ep-Kwt" id="RqK-3z-tDA"/>
                     </connections>
                 </viewController>

@@ -11,12 +11,14 @@ import Firebase
 import GoogleSignIn
 
 
-class channelViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class channelViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, registerViewDelegate {
+    
     
     var signIn: GIDSignIn?
     var userID = ""
     var channels = [ChatRoom?]()
     @IBOutlet weak var channelView: UITableView!
+    @IBOutlet weak var registerNewClass: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,8 +55,25 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             self.channels.append(chatroom)
         }
     }
+    
     @IBAction func registerChatroom(_ sender: Any) {
-        
+        // Load and configure your view controller.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let registerVC = storyboard.instantiateViewController(
+            withIdentifier: "registerViewController") as! registerViewController
+        registerVC.delegate = self
+        self.present(registerVC, animated: true, completion: nil)
+    }
+    
+    func cancel() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func join(classroom: String) {
+        self.dismiss(animated: true, completion: nil)
+        let chatroom = ChatRoom.init(name: classroom)
+        self.channels.append(chatroom)
+        self.channelView.reloadData()
     }
     
     @IBAction func signOut(_ sender: UIButton) {
