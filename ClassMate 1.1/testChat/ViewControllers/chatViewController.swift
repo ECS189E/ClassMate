@@ -115,7 +115,7 @@ class chatViewController: MessagesViewController {
         //reload data
         for eachMessage in messageList
         {
-            let memberTemp = Member(name: self.member.name, color: UIColor(hexString: eachMessage["color"] ?? ""))
+            let memberTemp = Member(name: eachMessage["userName"]!, color: UIColor(hexString: eachMessage["color"] ?? ""))
             
             let newMessage = Message(
                 member: memberTemp,
