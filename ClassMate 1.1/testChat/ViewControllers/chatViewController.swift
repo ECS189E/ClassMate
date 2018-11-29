@@ -29,14 +29,15 @@ class chatViewController: MessagesViewController {
         }
         
         self.title = name
-        member = Member(name: "bluemoon", color: .blue)
+        
+        member = Member(name: self.username!, color: .blue)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         
         retrieveMessages()
-        //listenForUpdate() // Init the listener
+        listenForUpdate() // Init the listener
     }
     
     // Helper for saving the newly sent message to the server
@@ -72,7 +73,7 @@ class chatViewController: MessagesViewController {
                 for eachMessage in messageArr
                 {
                     
-                    let member = Member(name: eachMessage["userName"]! , color: .blue)
+                    let member = Member(name: eachMessage["userName"]! , color: UIColor(hexString: eachMessage["color"] ?? ""))
 
                     guard let newDate = dateFormatterGet.date(from: eachMessage["date"]!) else {
                         fatalError()
@@ -88,7 +89,8 @@ class chatViewController: MessagesViewController {
                     self.messageList.append([
                         "date": dateFormatterGet.string(from: newDate),
                         "text": eachMessage["text"]!,
-                        "userName": newMessage.member.name
+                        "userName": newMessage.member.name,
+                        "color": newMessage.member.color.toHexString()
                     ])
                     
                     //need to sort messages based on sentDate later
@@ -102,9 +104,29 @@ class chatViewController: MessagesViewController {
         }
     }
     
-    func updateMessages()
+    func updateMessages(withData data: [Dictionary<String, String>])
     {
+        messageList = data
+        self.messages.removeAll()
         
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        //reload data
+        for eachMessage in messageList
+        {
+            let memberTemp = Member(name: self.member.name, color: UIColor(hexString: eachMessage["color"] ?? ""))
+            
+            let newMessage = Message(
+                member: memberTemp,
+                text: eachMessage["text"]!,
+                messageId: UUID().uuidString,
+                date: dateFormatterGet.date(from: eachMessage["date"]!)
+            )
+            
+            insertNewMessage(newMessage)
+        }
+
     }
     
     func listenForUpdate()
@@ -115,9 +137,17 @@ class chatViewController: MessagesViewController {
                 return
             }
             
-            snapshot.get("messages")
-            snapshot.get
-            self.updateMessages()
+            let data: [Dictionary<String, String>] = snapshot.get("messages") as! [Dictionary<String, String>]
+            self.updateMessages(withData: data)
+        }
+    }
+    
+    func insertNewMessage(_ message: Message)
+    {
+        messages.append(message)
+        
+        DispatchQueue.main.async {
+            self.messagesCollectionView.scrollToBottom(animated: true)
         }
     }
 
@@ -188,6 +218,7 @@ extension chatViewController: MessagesDisplayDelegate {
     }
 }
 
+// Handle the message from current user
 extension chatViewController: MessageInputBarDelegate {
     func messageInputBar(
         _ inputBar: MessageInputBar,
@@ -207,7 +238,8 @@ extension chatViewController: MessageInputBarDelegate {
         messageList.append([
             "date": dateFormatterGet.string(from: newMessage.sentDate),
             "text": newMessage.text,
-            "userName": self.member.name
+            "userName": self.member.name,
+            "color": self.member.color.toHexString()
             ])
         
         save()
@@ -215,5 +247,44 @@ extension chatViewController: MessageInputBarDelegate {
         inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToBottom(animated: true)
+    }
+}
+
+// Convert UIColor to hexString
+extension UIColor {
+    convenience init(hexString:String) {
+        
+        let scanner  = Scanner(string: hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))
+        
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        
+        var color:UInt32 = 0
+        scanner.scanHexInt32(&color)
+        
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        
+        self.init(red:red, green:green, blue:blue, alpha:1)
+    }
+    
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        
+        return NSString(format:"#%06x", rgb) as String
     }
 }
