@@ -97,6 +97,7 @@ class chatViewController: MessagesViewController {
                 }
                 
                 self.messagesCollectionView.reloadData()
+                self.messagesCollectionView.scrollToBottom(animated: false)
                 
             } else {
                 print("Document does not exist")
@@ -145,10 +146,10 @@ class chatViewController: MessagesViewController {
     func insertNewMessage(_ message: Message)
     {
         messages.append(message)
+        self.messagesCollectionView.reloadData()
         
         //DispatchQueue.main.async {
-        self.messagesCollectionView.reloadData()
-        self.messagesCollectionView.scrollToBottom(animated: true)
+        //    self.messagesCollectionView.scrollToBottom(animated: true)
         //}
         
         
@@ -193,11 +194,6 @@ extension chatViewController: MessagesDataSource {
 }
 
 extension chatViewController: MessagesLayoutDelegate {
-    
-    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        
-        return isFromCurrentSender(message: messages[indexPath.row]) ? UIColor(red: 1 / 255, green: 93 / 255, blue: 48 / 255, alpha: 1) : UIColor(red: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1)
-    } // TODO: FIX the bubble color
     
     func heightForLocation(message: MessageType,
                            at indexPath: IndexPath,
