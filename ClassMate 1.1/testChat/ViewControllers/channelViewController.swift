@@ -91,6 +91,60 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
+        // Check channels
+        // If doesn't exist, create a new one in database
+        addChannelToDatabase(which: classroom)
+        // Add in members
+        addMembersToDatabase(to: classroom)
+    }
+    
+    func addChannelToDatabase(which channel: String) {
+        let docRef = Firestore.firestore().collection("channels").document(channel)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists != true {
+                docRef.setData([
+                    "messages": [Message](),
+                    ]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                        }
+                }
+            }
+        }
+    }
+    
+    func addMembersToDatabase(to classroom: String) {
+        let docRef = Firestore.firestore().collection("members").document(classroom)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let memberListString = document.data() as! [String: Any]
+                var memberList = memberListString["members"] as! [String]
+                memberList.append(self.userID)
+                docRef.setData([
+                    "members": memberList,
+                    ]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                        }
+                }
+            } else {
+                docRef.setData([
+                    "members": [self.userID],
+                    ]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                        }
+                }
+            }
+        }
     }
     
     @IBAction func signOut(_ sender: UIButton) {
