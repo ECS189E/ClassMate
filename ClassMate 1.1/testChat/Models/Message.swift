@@ -19,6 +19,7 @@ struct Message {
     let member: Member
     let text: String
     let messageId: String
+    let date: Date?
 }
 
 extension Message: MessageType {
@@ -27,7 +28,7 @@ extension Message: MessageType {
     }
     
     var sentDate: Date {
-        return Date()
+        return date ?? Date()
     }
     
     var kind: MessageKind {
