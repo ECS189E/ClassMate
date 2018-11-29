@@ -147,8 +147,11 @@ class chatViewController: MessagesViewController {
         messages.append(message)
         
         //DispatchQueue.main.async {
-            self.messagesCollectionView.scrollToBottom(animated: true)
+        self.messagesCollectionView.reloadData()
+        self.messagesCollectionView.scrollToBottom(animated: true)
         //}
+        
+        
     }
 
 }
