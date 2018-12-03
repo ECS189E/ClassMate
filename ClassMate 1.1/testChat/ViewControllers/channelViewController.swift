@@ -34,20 +34,6 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         joinClassFromLocation()
     }
     
-    
-    func joinClassFromLocation() {
-        let ac = UIAlertController(title: nil, message: "Are you a student in ECS189e?", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
-            
-            // Acquire classroom based on location and time
-            let classroom = "ECS189e"
-            self.join(classroom: classroom)
-        }))
-        present(ac, animated: true, completion: nil)
-    }
-    
-    
     func retrieveChannels() {
         let docRef = Firestore.firestore().collection("users").document(self.userID)
         
@@ -159,6 +145,36 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
+    
+    // Instantly join chat based on user's current class
+    func joinClassFromLocation() {
+        let classroom = getClass()
+        let channelsRecommended = [classroom: 1]
+        
+        let ac = UIAlertController(title: nil, message: "Are you a student in \(classroom)?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+//            Firestore.firestore().collection("users").document(self.userID).setData([
+//                    "channelsRecommended": channelsRecommended
+//                ]) { err in
+//                    if let err = err {
+//                        print("Error writing document: \(err)")
+//                    } else {
+//                        print("Document successfully written!")
+//                    }
+//                }
+                self.join(classroom: classroom)
+            self.channelView.reloadData()
+            
+        }))
+        present(ac, animated: true, completion: nil)
+    }
+    
+    // Uses current location and time of user to get class
+    func getClass() -> String {
+        return "ECS189e"
+    }
+    
     
     @IBAction func signOut(_ sender: UIButton) {
         let ac = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .alert)

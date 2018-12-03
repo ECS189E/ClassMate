@@ -90,8 +90,6 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             channelVC.userID = user.userID!
             channelVC.userName = user.profile.email!
             
-            // Display appropriate view based on whether user is new
-
             let navController = UINavigationController(rootViewController:  channelVC)
             self.present(navController, animated:true, completion: nil)
         }
