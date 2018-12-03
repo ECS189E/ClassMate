@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 import Firebase
 import GoogleSignIn
+import CoreLocation
 
 
-class channelViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, registerViewDelegate {
+class channelViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, registerViewDelegate, CLLocationManagerDelegate {
     
     
     var signIn: GIDSignIn?
@@ -19,12 +20,15 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     var userName = ""
     var channels = [ChatRoom?]()
     var channelList = [String]()
+    var locationManager: CLLocationManager!
     @IBOutlet weak var channelView: UITableView!
     @IBOutlet weak var registerNewClass: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isToolbarHidden = false
+        
+        getCurrentLocation()
     }
     
     override func viewDidLoad() {
@@ -192,6 +196,35 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     // Uses current location and time of user to get class
     func getClass() -> String {
         return "ECS189ee"
+    }
+    
+    func getCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+            //locationManager.startUpdatingHeading()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        
+        // Call stopUpdatingLocation() to stop listening for location updates,
+        // other wise this function will be called every time when user location changes.
+        
+        manager.stopUpdatingLocation()
+        
+        print("user latitude = \(userLocation.coordinate.latitude)")
+        print("user longitude = \(userLocation.coordinate.longitude)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print("Error \(error)")
     }
     
     
