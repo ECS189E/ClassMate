@@ -149,30 +149,49 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     // Instantly join chat based on user's current class
     func joinClassFromLocation() {
         let classroom = getClass()
-        let channelsRecommended = [classroom: 1]
         
-        let ac = UIAlertController(title: nil, message: "Are you a student in \(classroom)?", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
-//            Firestore.firestore().collection("users").document(self.userID).setData([
-//                    "channelsRecommended": channelsRecommended
-//                ]) { err in
-//                    if let err = err {
-//                        print("Error writing document: \(err)")
-//                    } else {
-//                        print("Document successfully written!")
-//                    }
-//                }
-                self.join(classroom: classroom)
-            self.channelView.reloadData()
-            
-        }))
-        present(ac, animated: true, completion: nil)
+        // Recommend current class to user if it has not been recommended before or currently joined
+        let docRef = Firestore.firestore().collection("users").document(self.userID)
+        
+        var recommendedChannels: [String: Int] = [:]
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data() as! [String: Any]
+                recommendedChannels = data["recommendedChannels"] as? [String: Int] ?? [:]
+                
+                // Check if classroom has been recommended before or currently joined
+                // TODO: check current chatrooms
+                if recommendedChannels[classroom] == nil {
+                    recommendedChannels[classroom] = 1
+                    
+                    // Update database
+                    Firestore.firestore().collection("users").document(self.userID).updateData([
+                        "recommendedChannels": recommendedChannels
+                    ]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                        }
+                    }
+                    
+                    let ac = UIAlertController(title: nil, message: "Are you a student in \(classroom)?", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                    ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+                        self.join(classroom: classroom)
+                        self.channelView.reloadData() // may be unnecessary
+                    }))
+                    self.present(ac, animated: true, completion: nil)
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     // Uses current location and time of user to get class
     func getClass() -> String {
-        return "ECS189e"
+        return "ECS189ee"
     }
     
     
