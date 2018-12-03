@@ -40,6 +40,7 @@ class registerViewController: UIViewController, UITextFieldDelegate {
     @IBAction func joinTapped(_ sender: UIButton) {
         if let name = joinTextField.text {
             self.delegate?.join(classroom: name)
+            self.delegate?.cancel()
         } else {
             self.delegate?.cancel()
         }

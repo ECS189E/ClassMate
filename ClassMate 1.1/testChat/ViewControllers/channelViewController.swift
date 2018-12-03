@@ -87,7 +87,6 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     }
     
     func join(classroom: String) {
-        self.dismiss(animated: true, completion: nil)
         // check if channels already joined
         if channels.contains(where: {$0!.name == classroom}) != true {
             let chatroom = ChatRoom.init(name: classroom)
