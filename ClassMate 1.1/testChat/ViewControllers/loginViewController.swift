@@ -10,6 +10,7 @@ import UIKit
 import GoogleSignIn
 import Firebase
 
+
 class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     var ref: DocumentReference!
@@ -93,16 +94,42 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             channelVC.userName = user.profile.email!
             
             // Display appropriate view based on whether user is new
-            if newUser {
-                let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! profileViewController
-                let navController = UINavigationController(rootViewController: profileVC)
-                self.present(navController, animated:true, completion: nil)
-            } else {
-                let navController = UINavigationController(rootViewController: channelVC)
-                self.present(navController, animated:true, completion: nil)
-            }
+//            if newUser {
+//                self.joinClassFromLocation(channelVC: channelVC)
+//            }
+//                let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! profileViewController
+//                let navController = UINavigationController(rootViewController: profileVC)
+//                self.present(navController, animated:true, completion: nil)
+//            } else {
+            let navController = UINavigationController(rootViewController:  channelVC)
+            self.present(navController, animated:true, completion: nil)
+//            }
         }
     }
+//
+//    func joinClassFromLocation(channelVC: channelViewController) {
+//        let ac = UIAlertController(title: nil, message: "Are you a student in ECS189e?", preferredStyle: .alert)
+//        ac.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+//        ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+//
+//            // Acquire classroom based on location and time
+//            let navController = UINavigationController(rootViewController:  channelVC)
+//            self.present(navController, animated:true, completion: nil)
+////            let classroom = "ECS189e"
+////            channelViewController().join(classroom: classroom)
+//        }))
+//        present(ac, animated: true, completion: nil)
+//    }
+//
+    
+    func cancel() {
+        
+    }
+    
+    func join(classroom: String) {
+        
+    }
+    
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.

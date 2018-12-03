@@ -31,8 +31,22 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         channelView.tableFooterView = UIView()
         retrieveChannels()
-        
+        joinClassFromLocation()
     }
+    
+    
+    func joinClassFromLocation() {
+        let ac = UIAlertController(title: nil, message: "Are you a student in ECS189e?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+            
+            // Acquire classroom based on location and time
+            let classroom = "ECS189e"
+            self.join(classroom: classroom)
+        }))
+        present(ac, animated: true, completion: nil)
+    }
+    
     
     func retrieveChannels() {
         let docRef = Firestore.firestore().collection("users").document(self.userID)
