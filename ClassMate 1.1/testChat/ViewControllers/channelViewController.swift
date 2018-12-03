@@ -207,6 +207,10 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
             //locationManager.startUpdatingHeading()
+            
+            // Fountain circle center
+            let center = [38.562193, -121.765967]
+            
         }
     }
     
