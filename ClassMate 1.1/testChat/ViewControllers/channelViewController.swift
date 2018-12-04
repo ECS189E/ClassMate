@@ -11,6 +11,17 @@ import Firebase
 import GoogleSignIn
 import CoreLocation
 
+class Classroom {
+    let course: String
+    let locationName: String
+    let location: CLLocation
+    
+    init(course: String, locationName: String, latitude: Double, longitude: Double) {
+        self.course = course
+        self.locationName = locationName
+        self.location = CLLocation(latitude: latitude, longitude: longitude)
+    }
+}
 
 class channelViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, registerViewDelegate, CLLocationManagerDelegate {
     
@@ -21,6 +32,10 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     var channels = [ChatRoom?]()
     var channelList = [String]()
     var locationManager: CLLocationManager!
+    
+    // Maybe this should be on the database
+    var classrooms = [Classroom(course: "ECS189f", locationName: "Art Hall", latitude: 37.785834, longitude: -122.406417)] // Art hall
+    
     @IBOutlet weak var channelView: UITableView!
     @IBOutlet weak var registerNewClass: UIBarButtonItem!
     
@@ -35,7 +50,6 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         channelView.tableFooterView = UIView()
         retrieveChannels()
-        joinClassFromLocation()
     }
     
     func retrieveChannels() {
@@ -150,10 +164,47 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    // Instantly join chat based on user's current class
-    func joinClassFromLocation() {
-        let classroom = getClass()
+    
+    func getCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
         
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+            //locationManager.startUpdatingHeading()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        manager.stopUpdatingLocation()
+        
+        for classroom in classrooms {
+            if userWithinDistance(userLocation: userLocation, classLocation: classroom.location, delta: 0.01) {
+                joinClassFromLocation(classroom: classroom.course)
+            } else {
+                // Not near any class
+            }
+        }
+    }
+    
+    func userWithinDistance(userLocation: CLLocation, classLocation: CLLocation, delta: Double) -> Bool {
+        let userLat = userLocation.coordinate.latitude
+        let userLon = userLocation.coordinate.longitude
+        let classLat = classLocation.coordinate.latitude
+        let classLon = classLocation.coordinate.longitude
+        
+        if abs(userLat - classLat) < delta && abs(userLon - classLon) < delta {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    // Instantly join chat based on user's current class
+    func joinClassFromLocation(classroom: String) {
         // Recommend current class to user if it has not been recommended before or currently joined
         let docRef = Firestore.firestore().collection("users").document(self.userID)
         
@@ -192,68 +243,6 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             }
         }
     }
-    
-    // Uses current location and time of user to get class
-    func getClass() -> String {
-        return "ECS189e"
-    }
-    
-    func getCurrentLocation() {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
-            //locationManager.startUpdatingHeading()
-            
-//            // Fountain circle center
-//            let center = [38.562193, -121.765967]
-            
-            
-        }
-    }
-    
-    func checkDistance(userLocation: CLLocation, classLocation: CLLocation, delta: Double) -> Bool {
-        let userLat = userLocation.coordinate.latitude
-        let userLon = userLocation.coordinate.longitude
-        let classLat = classLocation.coordinate.latitude
-        let classLon = classLocation.coordinate.longitude
-        
-        if abs(userLat - classLat) < delta && abs(userLon - classLon) < delta {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation:CLLocation = locations[0] as CLLocation
-        
-        // Call stopUpdatingLocation() to stop listening for location updates,
-        // other wise this function will be called every time when user location changes.
-        
-        manager.stopUpdatingLocation()
-        
-        print("user latitude = \(userLocation.coordinate.latitude)")
-        print("user longitude = \(userLocation.coordinate.longitude)")
-        
-        
-        // Art hall
-        let loc = CLLocation(latitude: 37.785834, longitude: -122.406417)
-        if checkDistance(userLocation: userLocation, classLocation: loc, delta: 0.01) {
-            print("yes")
-        } else {
-            print("no")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
-    {
-        print("Error \(error)")
-    }
-    
     
     @IBAction func signOut(_ sender: UIButton) {
         let ac = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .alert)
