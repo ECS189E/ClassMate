@@ -195,7 +195,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     
     // Uses current location and time of user to get class
     func getClass() -> String {
-        return "ECS189ee"
+        return "ECS189e"
     }
     
     func getCurrentLocation() {
@@ -208,9 +208,23 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             locationManager.startUpdatingLocation()
             //locationManager.startUpdatingHeading()
             
-            // Fountain circle center
-            let center = [38.562193, -121.765967]
+//            // Fountain circle center
+//            let center = [38.562193, -121.765967]
             
+            
+        }
+    }
+    
+    func checkDistance(userLocation: CLLocation, classLocation: CLLocation, delta: Double) -> Bool {
+        let userLat = userLocation.coordinate.latitude
+        let userLon = userLocation.coordinate.longitude
+        let classLat = classLocation.coordinate.latitude
+        let classLon = classLocation.coordinate.longitude
+        
+        if abs(userLat - classLat) < delta && abs(userLon - classLon) < delta {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -224,6 +238,15 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         
         print("user latitude = \(userLocation.coordinate.latitude)")
         print("user longitude = \(userLocation.coordinate.longitude)")
+        
+        
+        // Art hall
+        let loc = CLLocation(latitude: 37.785834, longitude: -122.406417)
+        if checkDistance(userLocation: userLocation, classLocation: loc, delta: 0.01) {
+            print("yes")
+        } else {
+            print("no")
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
