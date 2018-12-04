@@ -31,6 +31,12 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        // TODO: Use this to skip login view for existing users
+        if Auth.auth().currentUser != nil {
+            print("@@@@@@")
+            print(Auth.auth().currentUser)
+            print("#####")
+        }
         GIDSignIn.sharedInstance().uiDelegate = self
         
     }
