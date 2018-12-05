@@ -146,26 +146,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oQ2-zQ-ARB">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="apP-pR-5fY">
                                         <rect key="frame" x="0.0" y="25.5" width="354" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="72M-AE-2xf">
-                                <rect key="frame" x="30" y="375.5" width="354" height="131.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-nB-RZO">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="101.5"/>
-                                        <string key="text">Enter at least one class — this will be used to determine what chatrooms to automatically add you into [use a picker for this too — one selector for subject (ECS) and one selector for course number (189e)]</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="74I-pc-rHD">
-                                        <rect key="frame" x="0.0" y="101.5" width="354" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -181,7 +163,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EXo-nj-Gef">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tro-fi-niZ">
                                         <rect key="frame" x="0.0" y="20.5" width="354" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -192,40 +174,42 @@
                                     <constraint firstAttribute="height" constant="50.5" id="hMW-Jm-2yu"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9Qr-id-FeV">
-                                <rect key="frame" x="30" y="290" width="354" height="55.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year [use a picker instead of textField for this]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMW-sD-ZE6">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yBc-gX-9W2">
-                                        <rect key="frame" x="0.0" y="25.5" width="354" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Year " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMW-sD-ZE6">
+                                <rect key="frame" x="34" y="293" width="39" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H7o-ME-whu">
+                                <rect key="frame" x="30" y="322" width="356" height="79"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter at least one class" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTA-nB-RZO">
+                                <rect key="frame" x="34" y="423" width="354" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="74I-pc-rHD">
+                                <rect key="frame" x="30" y="449" width="354" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9Qr-id-FeV" firstAttribute="top" secondItem="DV7-TQ-z0f" secondAttribute="bottom" constant="30" id="0nc-rs-VmR"/>
                             <constraint firstItem="vgt-qy-d9i" firstAttribute="trailing" secondItem="jnD-QL-Rwu" secondAttribute="trailing" constant="163" id="4BI-It-lFm"/>
-                            <constraint firstItem="vgt-qy-d9i" firstAttribute="trailing" secondItem="72M-AE-2xf" secondAttribute="trailing" constant="30" id="5ib-bQ-cK1"/>
                             <constraint firstItem="jnD-QL-Rwu" firstAttribute="top" secondItem="vgt-qy-d9i" secondAttribute="top" constant="30" id="6xv-mI-5fb"/>
-                            <constraint firstItem="72M-AE-2xf" firstAttribute="top" secondItem="9Qr-id-FeV" secondAttribute="bottom" constant="30" id="8dr-v0-aMY"/>
                             <constraint firstItem="DV7-TQ-z0f" firstAttribute="leading" secondItem="vgt-qy-d9i" secondAttribute="leading" constant="30" id="C4c-jW-MqD"/>
                             <constraint firstItem="vgt-qy-d9i" firstAttribute="trailing" secondItem="wxC-CX-T1U" secondAttribute="trailing" constant="30" id="Ejz-7y-DG3"/>
-                            <constraint firstItem="9Qr-id-FeV" firstAttribute="leading" secondItem="vgt-qy-d9i" secondAttribute="leading" constant="30" id="FJo-NM-8Zo"/>
                             <constraint firstItem="DV7-TQ-z0f" firstAttribute="top" secondItem="wxC-CX-T1U" secondAttribute="bottom" constant="30" id="Lpx-4a-JEq"/>
-                            <constraint firstItem="72M-AE-2xf" firstAttribute="leading" secondItem="vgt-qy-d9i" secondAttribute="leading" constant="30" id="RLd-dT-cfI"/>
                             <constraint firstItem="jnD-QL-Rwu" firstAttribute="leading" secondItem="vgt-qy-d9i" secondAttribute="leading" constant="163" id="YIc-Gy-4a3"/>
                             <constraint firstItem="wxC-CX-T1U" firstAttribute="top" secondItem="jnD-QL-Rwu" secondAttribute="bottom" constant="14" id="ZT0-Ck-VQw"/>
                             <constraint firstItem="wxC-CX-T1U" firstAttribute="leading" secondItem="vgt-qy-d9i" secondAttribute="leading" constant="30" id="j4K-bg-Skd"/>
-                            <constraint firstItem="vgt-qy-d9i" firstAttribute="trailing" secondItem="9Qr-id-FeV" secondAttribute="trailing" constant="30" id="ksI-64-AqI"/>
                             <constraint firstItem="vgt-qy-d9i" firstAttribute="trailing" secondItem="DV7-TQ-z0f" secondAttribute="trailing" constant="30" id="p6J-gx-ez4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vgt-qy-d9i"/>
