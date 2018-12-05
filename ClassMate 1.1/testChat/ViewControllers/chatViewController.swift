@@ -16,6 +16,7 @@ class chatViewController: MessagesViewController {
     var messageList: [Dictionary<String, String>] = []
     var member: Member!
     var username: String?
+    var displayName: String?
     var channelName: String?
     var messageListener: ListenerRegistration?
 
@@ -153,7 +154,7 @@ extension chatViewController: MessagesDataSource {
     }
     
     func currentSender() -> Sender {
-        return Sender(id: member.name, displayName: member.name)
+        return Sender(id: member.name, displayName: displayName)
     }
     
     func messageForItem(
