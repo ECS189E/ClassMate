@@ -321,7 +321,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         
         vc.channelName = channel?.name ?? " "
         vc.username = self.userName
-        vc.email = self.email
+//        vc.email = self.email
         navigationController!.pushViewController(vc, animated: true)
     }
     
