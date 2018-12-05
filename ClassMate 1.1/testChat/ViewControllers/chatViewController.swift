@@ -15,8 +15,8 @@ class chatViewController: MessagesViewController {
     var messages: [Message] = []
     var messageList: [Dictionary<String, String>] = []
     var member: Member!
+    var email: String?
     var username: String?
-    var displayName: String?
     var channelName: String?
     var messageListener: ListenerRegistration?
 
@@ -31,7 +31,7 @@ class chatViewController: MessagesViewController {
         
         self.title = name
         
-        member = Member(name: self.username!, color: .blue)
+        member = Member(name: self.email!, color: .blue)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
@@ -154,7 +154,7 @@ extension chatViewController: MessagesDataSource {
     }
     
     func currentSender() -> Sender {
-        return Sender(id: member.name, displayName: displayName ?? member.name)
+        return Sender(id: member.name, displayName: username ?? member.name)
     }
     
     func messageForItem(
