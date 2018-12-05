@@ -152,7 +152,6 @@ class chatViewController: MessagesViewController {
         //    self.messagesCollectionView.scrollToBottom(animated: true)
         //}
         
-        
     }
 
 }

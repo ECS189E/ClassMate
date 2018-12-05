@@ -11,15 +11,16 @@ import MessageInputBar
 import Firebase
 import GoogleSignIn
 
-class profileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class profileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource, UITableViewDelegate {
     
     var signIn: GIDSignIn?
     var userID = ""
     var userName = ""
+    var classList = [String]()
     let pickerData: [String] = ["Freshman", "Sophomore", "Junior", "Senior", "Super Senior"]
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var yearPicker: UIPickerView!
-    @IBOutlet weak var classesTextField: UITextField!
+    @IBOutlet weak var classTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,9 @@ class profileViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.initializeProfile()
         self.yearPicker.delegate = self
         self.yearPicker.dataSource = self
+        self.classTableView.delegate = self
+        self.classTableView.dataSource = self
+        
     }
     
     func initializeProfile() {
@@ -49,16 +53,43 @@ class profileViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 // Update classes using channels list
                 guard let channels = data["channels"] as? [String] else { return }
                 
-                let classes = channels.joined(separator: ",")
-                self.classesTextField.text = classes
-                    
-                 
+                self.classList = channels
+                self.classList.sort()
+                self.classTableView.reloadData()
                 
             } else {
                 print("Document does not exist")
             }
         }
     }
+    
+    
+    // classroom table view functions
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return classList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let classTaken = self.classList[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "profileClassCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "profileClassCell")
+        cell.textLabel?.text = classTaken
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    // end class room table view functions
+
     
     // yearPicker functions
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

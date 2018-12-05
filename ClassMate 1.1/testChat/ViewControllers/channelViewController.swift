@@ -284,6 +284,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    //channel table view functions
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -324,6 +325,8 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
 //        vc.email = self.email
         navigationController!.pushViewController(vc, animated: true)
     }
+    // end channel table view functions
+    
     
     @IBAction func toProfile(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

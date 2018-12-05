@@ -36,6 +36,7 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             print("@@@@@@")
             print(Auth.auth().currentUser)
             print("#####")
+            
         }
         GIDSignIn.sharedInstance().uiDelegate = self
         
