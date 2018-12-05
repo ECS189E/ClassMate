@@ -41,6 +41,7 @@ class profileViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
                 guard let data = document.data() else { return }
                 
                 // Update username
+                self.userName = data["userName"] as! String
                 self.userNameTextField.text = self.userName
                 guard var year = data["year"] as? Int else { return }
                 
