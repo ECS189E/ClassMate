@@ -29,6 +29,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     var signIn: GIDSignIn?
     var userID = ""
     var userName = ""
+    var email = ""
     var channels = [ChatRoom?]()
     var channelList = [String]()
     var locationManager: CLLocationManager!
@@ -38,6 +39,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var channelView: UITableView!
     @IBOutlet weak var registerNewClass: UIBarButtonItem!
+    @IBOutlet weak var profileButton: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,7 +51,24 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         channelView.tableFooterView = UIView()
+        getUsername()
         retrieveChannels()
+    }
+    
+    // Fetch username from server
+    func getUsername() {
+        let docRef = Firestore.firestore().collection("users").document(self.userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else { return }
+                
+                if let userName = data["userName"] as? String {
+                    self.userName = userName
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     func retrieveChannels() {
@@ -57,7 +76,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let channelListString = document.data() as! [String: Any]
+                guard let channelListString = document.data() else { return }
                 self.channelList = channelListString["channels"] as! [String]
                 self.initializeChannels(using: self.channelList)
                 self.channelView.reloadData()
@@ -97,7 +116,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             self.channels.append(chatroom)
             self.channelList.append(classroom)
             self.channelView.reloadData()
-            Firestore.firestore().collection("users").document(userID).setData([
+            Firestore.firestore().collection("users").document(userID).updateData([
                 "userName": self.userName,
                 "channels": self.channelList
             ]) { err in
@@ -138,7 +157,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let memberListString = document.data() as! [String: Any]
+                guard let memberListString = document.data() else { return }
                 var memberList = memberListString["members"] as! [String]
                 memberList.append(self.userID)
                 docRef.setData([
@@ -164,7 +183,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    
+    // Begins listening to user's location, calls locationManager()
     func getCurrentLocation() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -177,6 +196,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // Checks user's current location against location of all classes in directory
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
         manager.stopUpdatingLocation()
@@ -190,6 +210,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // Calculates whether two coordinates close within a delta
     func userWithinDistance(userLocation: CLLocation, classLocation: CLLocation, delta: Double) -> Bool {
         let userLat = userLocation.coordinate.latitude
         let userLon = userLocation.coordinate.longitude
@@ -211,12 +232,13 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         var recommendedChannels: [String: Int] = [:]
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let data = document.data() as! [String: Any]
+                guard let data = document.data() else { return }
                 recommendedChannels = data["recommendedChannels"] as? [String: Int] ?? [:]
                 
-                // Check if classroom has been recommended before or currently joined
                 // TODO: check current chatrooms
+                // Check if classroom has been recommended before or currently joined
                 if recommendedChannels[classroom] == nil {
+                    // Classroom has never been recommended
                     recommendedChannels[classroom] = 1
                     
                     // Update database
@@ -230,6 +252,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
                         }
                     }
                     
+                    // Creates Alert to prompt user to join
                     let ac = UIAlertController(title: nil, message: "Are you a student in \(classroom)?", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
                     ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
@@ -298,7 +321,24 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         
         vc.channelName = channel?.name ?? " "
         vc.username = self.userName
+        vc.email = self.email
         navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func toProfile(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(
+            withIdentifier: "profileViewController") as! profileViewController
+        
+        profileVC.signIn = signIn
+        profileVC.userID = userID
+        profileVC.userName = userName
+        
+        if (navigationController != nil) {
+            navigationController?.pushViewController(profileVC, animated: true)
+        } else {
+            print("Cannot find navigation controller.")
+        }
     }
     
 }

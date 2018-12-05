@@ -16,6 +16,7 @@ class chatViewController: MessagesViewController {
     var messageList: [Dictionary<String, String>] = []
     var member: Member!
     var username: String?
+    var email: String?
     var channelName: String?
     var messageListener: ListenerRegistration?
 
@@ -30,7 +31,7 @@ class chatViewController: MessagesViewController {
         
         self.title = name
         
-        member = Member(name: self.username!, color: .blue)
+        member = Member(name: self.username!, email: self.email!, color: .blue)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
@@ -73,7 +74,7 @@ class chatViewController: MessagesViewController {
                 for eachMessage in messageArr
                 {
                     
-                    let member = Member(name: eachMessage["userName"]! , color: UIColor(hexString: eachMessage["color"] ?? ""))
+                    let member = Member(name: eachMessage["userName"]!, email: eachMessage["email"]!, color: UIColor(hexString: eachMessage["color"] ?? ""))
 
                     guard let newDate = dateFormatterGet.date(from: eachMessage["date"]!) else {
                         fatalError()
@@ -90,6 +91,7 @@ class chatViewController: MessagesViewController {
                         "date": dateFormatterGet.string(from: newDate),
                         "text": eachMessage["text"]!,
                         "userName": newMessage.member.name,
+                        "emai": newMessage.member.email,
                         "color": newMessage.member.color.toHexString()
                     ])
                     
@@ -116,7 +118,7 @@ class chatViewController: MessagesViewController {
         //reload data
         for eachMessage in messageList
         {
-            let memberTemp = Member(name: eachMessage["userName"]!, color: UIColor(hexString: eachMessage["color"] ?? ""))
+            let memberTemp = Member(name: eachMessage["userName"]!, email: eachMessage["email"]!, color: UIColor(hexString: eachMessage["color"] ?? ""))
             
             let newMessage = Message(
                 member: memberTemp,
@@ -164,7 +166,7 @@ extension chatViewController: MessagesDataSource {
     }
     
     func currentSender() -> Sender {
-        return Sender(id: member.name, displayName: member.name)
+        return Sender(id: member.email, displayName: member.name)
     }
     
     func messageForItem(
@@ -238,6 +240,7 @@ extension chatViewController: MessageInputBarDelegate {
             "date": dateFormatterGet.string(from: newMessage.sentDate),
             "text": newMessage.text,
             "userName": self.member.name,
+            "email": self.member.email,
             "color": self.member.color.toHexString()
             ])
         

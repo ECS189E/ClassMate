@@ -94,7 +94,7 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             
             channelVC.signIn = signIn
             channelVC.userID = user.userID!
-            channelVC.userName = user.profile.email!
+            channelVC.email = user.profile.email!
             
             let navController = UINavigationController(rootViewController:  channelVC)
             self.present(navController, animated:true, completion: nil)
@@ -119,7 +119,9 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
         // Add a new document with a generated ID
         Firestore.firestore().collection("users").document(id).setData([
             "userName": email,
-            "channels": [String]()
+            "email": email,
+            "channels": [String](),
+            "year": -1,
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
