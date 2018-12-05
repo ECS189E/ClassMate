@@ -154,7 +154,7 @@ extension chatViewController: MessagesDataSource {
     }
     
     func currentSender() -> Sender {
-        return Sender(id: member.name, displayName: displayName)
+        return Sender(id: member.name, displayName: displayName ?? member.name)
     }
     
     func messageForItem(
