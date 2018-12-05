@@ -125,9 +125,10 @@ class chatViewController: MessagesViewController {
                 date: dateFormatterGet.date(from: eachMessage["date"]!)
             )
             
-            insertNewMessage(newMessage)
+            messages.append(newMessage)
         }
-
+        self.messagesCollectionView.reloadData()
+        self.messagesCollectionView.scrollToBottom(animated: true)
     }
     
     func listenForUpdate()
@@ -141,17 +142,6 @@ class chatViewController: MessagesViewController {
             let data: [Dictionary<String, String>] = snapshot.get("messages") as! [Dictionary<String, String>]
             self.updateMessages(withData: data)
         }
-    }
-    
-    func insertNewMessage(_ message: Message)
-    {
-        messages.append(message)
-        self.messagesCollectionView.reloadData()
-        
-        //DispatchQueue.main.async {
-        //    self.messagesCollectionView.scrollToBottom(animated: true)
-        //}
-        
     }
 
 }
