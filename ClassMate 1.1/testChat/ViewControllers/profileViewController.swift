@@ -13,7 +13,7 @@ import GoogleSignIn
 
 class profileViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource, UITableViewDelegate {
     
-    var signIn: GIDSignIn?
+//    var signIn: GIDSignIn?
     var userID = ""
     var userName = ""
     var classList = [String]()

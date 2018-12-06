@@ -25,8 +25,6 @@ class Classroom {
 
 class channelViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, registerViewDelegate, CLLocationManagerDelegate {
     
-    
-    var signIn: GIDSignIn?
     var userID = ""
     var userName = ""
     var email = ""
@@ -274,7 +272,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
-                self.signIn?.signOut()
+                GIDSignIn.sharedInstance().signOut()
             } catch let signOutError as NSError {
                 print ("Error signing out: %@", signOutError)
             }
@@ -335,7 +333,6 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         let profileVC = storyboard.instantiateViewController(
             withIdentifier: "profileViewController") as! profileViewController
         
-        profileVC.signIn = signIn
         profileVC.userID = userID
         profileVC.userName = userName
         

@@ -32,11 +32,24 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
         super.viewDidAppear(true)
         
         // TODO: Use this to skip login view for existing users
-        if Auth.auth().currentUser != nil {
+        let user = GIDSignIn.sharedInstance()?.currentUser
+        if user != nil {
             print("@@@@@@")
-            print(Auth.auth().currentUser)
+            print(user!)
             print("#####")
             
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let channelVC = storyboard.instantiateViewController(withIdentifier: "channelViewController") as! channelViewController
+            
+            // Prepare the data that need to be fetched from the server for next view
+            // ...
+            
+            channelVC.userID = user!.userID
+            print(channelVC.userID)
+            channelVC.email = user!.profile.email
+            
+            let navController = UINavigationController(rootViewController:  channelVC)
+            self.present(navController, animated:true, completion: nil)
         }
         GIDSignIn.sharedInstance().uiDelegate = self
         
@@ -46,6 +59,7 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
         GIDSignIn.sharedInstance().signIn()
         
     }
+    
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         // ...
@@ -93,7 +107,6 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             
             // TODO: Fetch the data from the server
             
-            channelVC.signIn = signIn
             channelVC.userID = user.userID!
             channelVC.email = user.profile.email!
             
