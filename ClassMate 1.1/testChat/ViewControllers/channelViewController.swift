@@ -320,9 +320,10 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "chatViewController") as! chatViewController
         
+        // keep the username up to date
+        self.getUsername()
         vc.channelName = channel?.name ?? " "
         vc.email = self.email
-        print(self.userName)
         vc.username = self.userName
         navigationController!.pushViewController(vc, animated: true)
     }

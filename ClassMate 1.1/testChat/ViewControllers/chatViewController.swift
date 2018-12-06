@@ -31,7 +31,7 @@ class chatViewController: MessagesViewController {
         
         self.title = name
         
-        member = Member(name: self.email!, color: .blue)
+        member = Member(name: self.username!, email: self.email!, color: .blue)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
@@ -74,7 +74,7 @@ class chatViewController: MessagesViewController {
                 for eachMessage in messageArr
                 {
                     
-                    let member = Member(name: eachMessage["userName"]! , color: UIColor(hexString: eachMessage["color"] ?? ""))
+                    let member = Member(name: eachMessage["userName"]! , email: self.email!, color: UIColor(hexString: eachMessage["color"] ?? ""))
 
                     guard let newDate = dateFormatterGet.date(from: eachMessage["date"]!) else {
                         fatalError()
@@ -117,7 +117,7 @@ class chatViewController: MessagesViewController {
         //reload data
         for eachMessage in messageList
         {
-            let memberTemp = Member(name: eachMessage["userName"]!, color: UIColor(hexString: eachMessage["color"] ?? ""))
+            let memberTemp = Member(name: eachMessage["userName"]!, email: self.email!, color: UIColor(hexString: eachMessage["color"] ?? ""))
             
             let newMessage = Message(
                 member: memberTemp,
@@ -154,7 +154,7 @@ extension chatViewController: MessagesDataSource {
     }
     
     func currentSender() -> Sender {
-        return Sender(id: member.name, displayName: username ?? member.name)
+        return Sender(id: member.email, displayName: username ?? member.name)
     }
     
     func messageForItem(
