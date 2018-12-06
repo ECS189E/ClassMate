@@ -31,7 +31,7 @@ class chatViewController: MessagesViewController {
         
         self.title = name
         
-        member = Member(name: self.username!, email: self.email!, color: .blue)
+        member = Member(name: self.username!, email: self.email!, color: .cyan)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
@@ -54,6 +54,7 @@ class chatViewController: MessagesViewController {
             "messages": self.messageList])
     }
     
+    
     func retrieveMessages()
     {
         
@@ -74,7 +75,7 @@ class chatViewController: MessagesViewController {
                 for eachMessage in messageArr
                 {
                     
-                    let member = Member(name: eachMessage["userName"]! , email: self.email!, color: UIColor(hexString: eachMessage["color"] ?? ""))
+                    let member = Member(name: eachMessage["userName"]! , email: eachMessage["email"]!, color: UIColor(hexString: eachMessage["color"] ?? ""))
 
                     guard let newDate = dateFormatterGet.date(from: eachMessage["date"]!) else {
                         fatalError()
@@ -86,12 +87,12 @@ class chatViewController: MessagesViewController {
                         messageId: UUID().uuidString,
                         date: newDate)
                     
-                    self.messages.append(newMessage)
                     self.messageList.append([
                         "date": dateFormatterGet.string(from: newDate),
                         "text": eachMessage["text"]!,
                         "userName": newMessage.member.name,
-                        "color": newMessage.member.color.toHexString()
+                        "color": newMessage.member.color.toHexString(),
+                        "email":eachMessage["email"]!
                     ])
                     
                     //need to sort messages based on sentDate later
@@ -117,7 +118,7 @@ class chatViewController: MessagesViewController {
         //reload data
         for eachMessage in messageList
         {
-            let memberTemp = Member(name: eachMessage["userName"]!, email: self.email!, color: UIColor(hexString: eachMessage["color"] ?? ""))
+            let memberTemp = Member(name: eachMessage["userName"]!, email: eachMessage["email"]!, color: UIColor(hexString: eachMessage["color"] ?? ""))
             
             let newMessage = Message(
                 member: memberTemp,
@@ -154,7 +155,7 @@ extension chatViewController: MessagesDataSource {
     }
     
     func currentSender() -> Sender {
-        return Sender(id: member.email, displayName: username ?? member.name)
+        return Sender(id: member.email, displayName: member.name)
     }
     
     func messageForItem(
@@ -228,7 +229,8 @@ extension chatViewController: MessageInputBarDelegate {
             "date": dateFormatterGet.string(from: newMessage.sentDate),
             "text": newMessage.text,
             "userName": self.member.name,
-            "color": self.member.color.toHexString()
+            "color": self.member.color.toHexString(),
+            "email": self.email!
             ])
         
         save()
