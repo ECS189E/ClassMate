@@ -24,6 +24,10 @@ class chatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        // Hide keyboard on-tap
+        self.hideKeyboard()
+        
         guard let name: String = self.channelName else {
             navigationController?.popViewController(animated: true)
             return
@@ -278,5 +282,23 @@ extension UIColor {
         let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         
         return NSString(format:"#%06x", rgb) as String
+    }
+}
+
+extension UIViewController
+{
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+        
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard()
+    {
+        view.endEditing(true)
     }
 }

@@ -28,11 +28,23 @@
                                     <action selector="signInPushed:" destination="ZDY-7C-sqZ" eventType="valueChanged" id="Ub7-1T-pyh"/>
                                 </connections>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClassMate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsu-fj-hfq">
+                                <rect key="frame" x="0.0" y="177" width="414" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Ond-yu-ja7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="59"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Vsu-fj-hfq" firstAttribute="leading" secondItem="cDO-4q-g6D" secondAttribute="leading" id="48U-oQ-idr"/>
+                            <constraint firstItem="Vsu-fj-hfq" firstAttribute="top" secondItem="cDO-4q-g6D" secondAttribute="top" constant="133" id="Jxf-ij-bVI"/>
                             <constraint firstItem="1TC-q0-vXj" firstAttribute="centerX" secondItem="cDO-4q-g6D" secondAttribute="centerX" id="PSB-jj-5pD"/>
                             <constraint firstItem="1TC-q0-vXj" firstAttribute="centerY" secondItem="cDO-4q-g6D" secondAttribute="centerY" multiplier="1.5" id="UOh-C0-5aS"/>
+                            <constraint firstItem="cDO-4q-g6D" firstAttribute="trailing" secondItem="Vsu-fj-hfq" secondAttribute="trailing" id="l0X-z6-EZI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cDO-4q-g6D"/>
                     </view>
@@ -40,7 +52,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXd-B9-N1X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-562" y="38"/>
+            <point key="canvasLocation" x="-562.31884057971024" y="37.5"/>
         </scene>
         <!--Channel View Controller-->
         <scene sceneID="nUK-8y-eoZ">

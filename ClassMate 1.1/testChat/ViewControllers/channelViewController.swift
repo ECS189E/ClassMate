@@ -33,7 +33,7 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     var locationManager: CLLocationManager!
     
     // Maybe this should be on the database
-    var classrooms = [Classroom(course: "ECS189f", locationName: "Art Hall", latitude: 37.785834, longitude: -122.406417)] // Art hall
+    var classrooms = [Classroom(course: "ECS189E", locationName: "Art Hall", latitude: 37.785834, longitude: -122.406417)] // Art hall
     
     @IBOutlet weak var channelView: UITableView!
     @IBOutlet weak var registerNewClass: UIBarButtonItem!
