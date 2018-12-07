@@ -37,7 +37,7 @@ class chatViewController: MessagesViewController {
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         
-        retrieveMessages()
+//        retrieveMessages()
         listenForUpdate() // Init the listener
     }
     
