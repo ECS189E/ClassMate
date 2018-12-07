@@ -30,7 +30,6 @@ class chatViewController: MessagesViewController {
         }
         
         self.title = name
-        
         maintainPositionOnKeyboardFrameChanged = true
         member = Member(name: self.username!, email: self.email!, color: .cyan)
         messagesCollectionView.messagesDataSource = self
@@ -91,7 +90,6 @@ class chatViewController: MessagesViewController {
                         "color": newMessage.member.color.toHexString(),
                         "email":eachMessage["email"]!
                     ])
-                    
                     //need to sort messages based on sentDate later
                 }
                 

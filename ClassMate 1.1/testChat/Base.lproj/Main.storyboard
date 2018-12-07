@@ -25,7 +25,7 @@
                                     <constraint firstAttribute="height" constant="128" id="sYe-Mb-yco"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="signInPushed:" destination="ZDY-7C-sqZ" eventType="valueChanged" id="Ub7-1T-pyh"/>
+                                    <action selector="signInPressed:" destination="ZDY-7C-sqZ" eventType="valueChanged" id="Ub7-1T-pyh"/>
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClassMate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsu-fj-hfq">
@@ -275,7 +275,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ie. ECS 189E" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m14-ep-Kwt">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ie. ECS189E" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m14-ep-Kwt">
                                 <rect key="frame" x="20" y="207" width="374" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

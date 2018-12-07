@@ -30,7 +30,6 @@ class profileViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.yearPicker.dataSource = self
         self.classTableView.delegate = self
         self.classTableView.dataSource = self
-        
     }
     
     func initializeProfile() {

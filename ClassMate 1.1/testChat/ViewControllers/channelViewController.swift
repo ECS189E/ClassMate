@@ -84,8 +84,8 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // change chatroom from [String] to [ChatRoom]
     func initializeChannels(using channelList: [String]) {
-        //for loop
         for channel in channelList
         {
             let chatroom = ChatRoom.init(name: channel)

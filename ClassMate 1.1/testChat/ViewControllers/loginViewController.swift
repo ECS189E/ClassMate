@@ -46,14 +46,12 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
         
     }
     
-    @IBAction func signInPushed(_ sender: GIDSignInButton) {
+    @IBAction func signInPressed(_ sender: GIDSignInButton) {
         GIDSignIn.sharedInstance().signIn()
-        
     }
     
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        // ...
         if let error = error {
             print("\(error.localizedDescription)")
             return
@@ -75,7 +73,6 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        // ...
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
             if let _ = error {
                 return
