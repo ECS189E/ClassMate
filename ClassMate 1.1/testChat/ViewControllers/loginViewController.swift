@@ -17,13 +17,6 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //GIDSignIn.sharedInstance().uiDelegate = self
-        
-        // TODO(developer) Configure the sign-in button look/feel
-        // ...
-        
         GIDSignIn.sharedInstance().clientID = "771197463282-b87trmajhetmgp1nlc294b5vs4sn7ofq.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
     }
@@ -42,8 +35,6 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             let channelVC = storyboard.instantiateViewController(withIdentifier: "channelViewController") as! channelViewController
             
             // Prepare the data that need to be fetched from the server for next view
-            // ...
-            
             channelVC.userID = user!.userID
             print(channelVC.userID)
             channelVC.email = user!.profile.email
@@ -69,15 +60,9 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             
         } else {
             // Perform any operations on signed in user here.
-            let userId = user.userID                  // For client-side use only!
-            let idToken = user.authentication.idToken // Safe to send to the server
-            let fullName = user.profile.name
-            let givenName = user.profile.givenName
-            let familyName = user.profile.familyName
+            let userId = user.userID
             let email = user.profile.email
-            // ...
             let docRef = Firestore.firestore().collection("users").document(userId!)
-
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     print("User already exists")
@@ -92,21 +77,14 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
                                                        accessToken: authentication.accessToken)
         // ...
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-            if let error = error {
-                // ...
+            if let _ = error {
                 return
             }
             // User is signed in
-            // ...
-            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let channelVC = storyboard.instantiateViewController(withIdentifier: "channelViewController") as! channelViewController
             
             // Prepare the data that need to be fetched from the server for next view
-            // ...
-            
-            // TODO: Fetch the data from the server
-            
             channelVC.userID = user.userID!
             channelVC.email = user.profile.email!
             
@@ -118,7 +96,6 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
-        // ...
     }
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
         print("dismissing Google SignIn")

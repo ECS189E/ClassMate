@@ -24,10 +24,6 @@ class chatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // Hide keyboard on-tap
-        self.hideKeyboard()
-        
         guard let name: String = self.channelName else {
             navigationController?.popViewController(animated: true)
             return
@@ -41,18 +37,15 @@ class chatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-//        retrieveMessages()
         listenForUpdate() // Init the listener
     }
     
     // Helper for saving the newly sent message to the server
     private func save() {
-        
         guard let name: String = self.channelName else {
             print("channelName is not set yet")
             return
         } // channelName is nill
-        
         print(name)
         Firestore.firestore().collection("channels").document(name).setData([
             "messages": self.messageList])
@@ -282,23 +275,5 @@ extension UIColor {
         let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         
         return NSString(format:"#%06x", rgb) as String
-    }
-}
-
-extension UIViewController
-{
-    func hideKeyboard()
-    {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(UIViewController.dismissKeyboard))
-        
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard()
-    {
-        view.endEditing(true)
     }
 }
