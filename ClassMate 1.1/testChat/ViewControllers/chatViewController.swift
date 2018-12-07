@@ -31,12 +31,12 @@ class chatViewController: MessagesViewController {
         
         self.title = name
         
+        maintainPositionOnKeyboardFrameChanged = true
         member = Member(name: self.username!, email: self.email!, color: .cyan)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messageInputBar.delegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        
 //        retrieveMessages()
         listenForUpdate() // Init the listener
     }
@@ -145,6 +145,7 @@ class chatViewController: MessagesViewController {
             self.updateMessages(withData: data)
         }
     }
+    
 
 }
 
