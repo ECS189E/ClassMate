@@ -27,9 +27,7 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
         // TODO: Use this to skip login view for existing users
         let user = GIDSignIn.sharedInstance()?.currentUser
         if user != nil {
-            print("@@@@@@")
             print(user!)
-            print("#####")
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let channelVC = storyboard.instantiateViewController(withIdentifier: "channelViewController") as! channelViewController
@@ -110,6 +108,7 @@ class loginViewController : UIViewController, GIDSignInUIDelegate, GIDSignInDele
             "email": email,
             "channels": [String](),
             "year": -1,
+            "recommendedChannels": [],
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

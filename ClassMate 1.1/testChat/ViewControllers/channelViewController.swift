@@ -11,18 +11,6 @@ import Firebase
 import GoogleSignIn
 import CoreLocation
 
-class Classroom {
-    let course: String
-    let locationName: String
-    let location: CLLocation
-    
-    init(course: String, locationName: String, latitude: Double, longitude: Double) {
-        self.course = course
-        self.locationName = locationName
-        self.location = CLLocation(latitude: latitude, longitude: longitude)
-    }
-}
-
 class channelViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, registerViewDelegate, CLLocationManagerDelegate {
     
     var userID = ""
@@ -33,7 +21,10 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
     var locationManager: CLLocationManager!
     
     // Maybe this should be on the database
-    var classrooms = [Classroom(course: "ECS189E", locationName: "Art Hall", latitude: 37.785834, longitude: -122.406417)] // Art hall
+    var classrooms = [
+        "ECS189E": Classroom(course: "ECS189E", locationName: "Art Hall", days: [2,4,6], time: 9...10, latitude: 37.785834, longitude: -122.406417),
+        "Anywhere Class": Classroom(course: "Anywhere class", locationName: "Will prompt anywhere", days: [1,2,3,4,5,6,7], time: 1...24, latitude: 37.785834, longitude: -122.406417),
+    ]
     
     @IBOutlet weak var channelView: UITableView!
     @IBOutlet weak var registerNewClass: UIBarButtonItem!
@@ -199,9 +190,11 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         let userLocation:CLLocation = locations[0] as CLLocation
         manager.stopUpdatingLocation()
         
-        for classroom in classrooms {
-            if userWithinDistance(userLocation: userLocation, classLocation: classroom.location, delta: 0.01) {
-                joinClassFromLocation(classroom: classroom.course)
+        for course in classrooms {
+            if userWithinDistance(userLocation: userLocation, classLocation: course.value.location, delta: 0.001) {
+                if classInSession(classroom: course.value) {
+                    joinClassFromLocation(classroom: course.key)
+                }
             } else {
                 // Not near any class
             }
@@ -216,6 +209,20 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
         let classLon = classLocation.coordinate.longitude
         
         if abs(userLat - classLat) < delta && abs(userLon - classLon) < delta {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func classInSession(classroom: Classroom) -> Bool {
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let day = Date().dayNumberOfWeek()!
+
+        // TODO: Find better way to check for time
+        if classroom.days.contains(day) && classroom.time.contains(hour) {
             return true
         } else {
             return false
@@ -342,5 +349,16 @@ class channelViewController : UIViewController, UITableViewDataSource, UITableVi
             print("Cannot find navigation controller.")
         }
     }
+}
+
+extension Date {
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
+    }
     
+    func dayOfWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: self).capitalized
+    }
 }

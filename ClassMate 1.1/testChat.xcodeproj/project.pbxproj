@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		423A9F624B890A65663DEE3E /* Pods_testChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C06E0F35C71899514CEF9E /* Pods_testChat.framework */; };
 		A150BD7521AE8BF7008E1D34 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150BD7421AE8BF7008E1D34 /* profileViewController.swift */; };
+		A1FAC6AA21BCA7540077FA8E /* Classroom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FAC6A921BCA7540077FA8E /* Classroom.swift */; };
 		A42595A321A91CDB00CA6826 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A42595A221A91CDB00CA6826 /* GoogleService-Info.plist */; };
 		A4A17A7D21AE1EBB0009EB50 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A17A7C21AE1EBA0009EB50 /* registerViewController.swift */; };
 		BA5B8CFC21A907C000DEB775 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5B8CFB21A907C000DEB775 /* AppDelegate.swift */; };
@@ -26,6 +27,7 @@
 		1FD6DEBD67EAA8F8024E6E52 /* Pods-testChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testChat/Pods-testChat.debug.xcconfig"; sourceTree = "<group>"; };
 		6A6001F3B19072341CC29D2B /* Pods-testChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-testChat/Pods-testChat.release.xcconfig"; sourceTree = "<group>"; };
 		A150BD7421AE8BF7008E1D34 /* profileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
+		A1FAC6A921BCA7540077FA8E /* Classroom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classroom.swift; sourceTree = "<group>"; };
 		A42595A221A91CDB00CA6826 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A4A17A7C21AE1EBA0009EB50 /* registerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
 		BA5B8CF821A907C000DEB775 /* testChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +92,7 @@
 			children = (
 				BAE33FF121A917FB00B6FFC9 /* Channel.swift */,
 				BAC20F4121A910FF00A1A43C /* Message.swift */,
+				A1FAC6A921BCA7540077FA8E /* Classroom.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				BA5B8CFC21A907C000DEB775 /* AppDelegate.swift in Sources */,
 				A150BD7521AE8BF7008E1D34 /* profileViewController.swift in Sources */,
 				A4A17A7D21AE1EBB0009EB50 /* registerViewController.swift in Sources */,
+				A1FAC6AA21BCA7540077FA8E /* Classroom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
